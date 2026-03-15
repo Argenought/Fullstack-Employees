@@ -1,7 +1,13 @@
 import client from "../client.js";
 
 /** @returns the employee created according to the provided details */
-export async function createEmployee(name, birthday, salary) {
+// Note to self the issue appears to be that the test provides an object
+// I did not write my code to parse an object
+// this can be fixed by placing the values in {}
+// Doing this broke my seed.js, so changed to match this
+// Not really an issue but will need to be careful when working with others
+// Because if they use objects and I don't it will make it appear null
+export async function createEmployee({ name, birthday, salary }) {
   const {
     rows: [createdEmployee],
   } = await client.query(
@@ -20,9 +26,8 @@ export async function createEmployee(name, birthday, salary) {
 
 /** @returns all employees */
 export async function getEmployees() {
-  const {
-    rows: [employees],
-  } = await client.query(
+  // Should not be in [] because that only retrieves one row? If I'm understanding this correctly
+  const { rows: employees } = await client.query(
     `
     SELECT *
     FROM employees

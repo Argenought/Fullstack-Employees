@@ -20,10 +20,10 @@ async function seedEmployees() {
       maxDay = 31;
     }
 
-    await createEmployee(
-      "Person" + i,
-      `${year}-${month}-${Math.floor(Math.random() * maxDay) + 1}`,
-      Math.floor(Math.random() * 99) + 1,
-    );
+    await createEmployee({
+      name: "Person" + i,
+      birthday: `${year}-${month}-${Math.floor(Math.random() * maxDay) + 1}`,
+      salary: Math.floor(Math.random() * 99) + 1,
+    });
   }
 }
